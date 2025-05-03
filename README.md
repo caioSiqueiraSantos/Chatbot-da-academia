@@ -1,4 +1,4 @@
-#Chatbot da Academia
+**Chatbot da Academia**
 
 Descrição do Projeto
 O Chatbot da Academia é um projeto desenvolvido como parte de um trabalho acadêmico. Ele é um assistente virtual que interage com os clientes de uma academia, fornecendo treinos personalizados com base nos dados cadastrados e nas informações fornecidas pelo cliente durante a conversa. Este projeto combina interatividade e algoritmos de ordenação para oferecer uma solução eficiente e prática para personalização de treinos.
