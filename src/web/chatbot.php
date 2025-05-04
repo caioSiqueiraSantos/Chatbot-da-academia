@@ -1,171 +1,142 @@
 <?php
 session_start();
-
-if (!isset($_SESSION['nome'])) {
-    header('Location: index.php');
-    exit;
+if (!isset($_SESSION['usuario'])) {
+    header("Location: index.php");
+    exit();
 }
 
-$nome = $_SESSION['nome'];
+$usuario = $_SESSION['usuario'];
 ?>
-
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chat Interativo</title>
+  <meta charset="UTF-8">
+  <title>Chat</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
-      font-family: 'Arial', sans-serif;
-      background-color: #0e0e10;
-      color: #f1f1f1;
-      height: 100vh;
-      display: flex;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #1e1e2f;
+      color: #fff;
     }
-
-    .user-info {
-      width: 200px;
-      background-color: #1a1a1d;
-      padding: 20px;
-      text-align: center;
+    .topo {
       display: flex;
-      flex-direction: column;
       align-items: center;
+      padding: 10px 20px;
+      background-color: #2a2a3d;
     }
-
-    .user-info img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #7289da;
-      margin-bottom: 10px;
+    .topo img {
+      width: 60px;
+      height: 60px;
+      border-radius: 10px;
+      margin-right: 10px;
     }
-
-    .user-info h2 {
-      font-size: 18px;
-      font-weight: 700;
+    .titulo {
+      font-size: 20px;
+      color: #00ffaa;
     }
-
-    .chat {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .messages {
-      flex: 1;
+    .chat-container {
       padding: 20px;
+      height: 70vh;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
-
-    .message {
-      max-width: 60%;
+    .mensagem {
       padding: 10px 15px;
-      border-radius: 10px;
-      font-weight: 500;
+      border-radius: 12px;
+      max-width: 70%;
+      line-height: 1.4em;
     }
-
-    .from-chat {
-      background-color: #2f3136;
-      align-self: flex-start;
-      border-radius: 10px 10px 10px 0;
-    }
-
-    .from-user {
-      background-color: #5865f2;
+    .usuario {
+      background-color: #00ffaa;
+      color: #000;
       align-self: flex-end;
-      border-radius: 10px 10px 0 10px;
     }
-
-    .input-area {
-      padding: 10px;
-      background-color: #1e1e22;
+    .bot {
+      background-color: #333;
+      align-self: flex-start;
+    }
+    .entrada {
       display: flex;
+      padding: 15px 20px;
+      background-color: #2a2a3d;
+      border-top: 1px solid #444;
     }
-
-    .input-area input {
+    .entrada input {
       flex: 1;
       padding: 10px;
       border: none;
-      border-radius: 5px;
-      background-color: #2f3136;
-      color: #f1f1f1;
+      border-radius: 6px;
+      margin-right: 10px;
+      background-color: #444;
+      color: white;
     }
-
-    .input-area input:focus {
-      outline: none;
+    .entrada button {
+      background-color: #00ffaa;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div class="user-info">
-    <img src="marcelinho.jpg"  />
-    <h2>Marcelinho Fit</h2>
+
+  <div class="topo">
+    <img src="marcelinho.jpg" alt="Bot">
+    <div class="titulo">Olá, <?= htmlspecialchars($usuario) ?>!</div>
   </div>
 
-  <div class="chat">
-    <div class="messages" id="chat-box">
-      <div class="message from-chat">Olá! Como posso te ajudar hoje?</div>
-    </div>
-    <div class="input-area">
-      <input type="text" id="message-input" placeholder="Escreva uma mensagem..." />
-    </div>
+  <div class="chat-container" id="chat">
+    <div class="mensagem bot">Bem-vindo, <?= htmlspecialchars($usuario) ?>! Como posso ajudar?</div>
+  </div>
+
+  <div class="entrada">
+    <input type="text" id="mensagemInput" placeholder="Digite sua mensagem..." onkeydown="if(event.key==='Enter') enviarMensagem()">
+    <button onclick="enviarMensagem()">Enviar</button>
   </div>
 
   <script>
-    const input = document.getElementById("message-input");
-    const chatBox = document.getElementById("chat-box");
+    function enviarMensagem() {
+      const input = document.getElementById('mensagemInput');
+      const texto = input.value.trim();
+      if (texto === "") return;
 
-    const respostas = [
-      "Claro! Posso te ajudar com isso.",
-      "Interessante! Me conte mais.",
-      "Você pode tentar fazer isso dessa forma...",
-      "Legal! Quer ver um exemplo?",
-      "Fico feliz em ajudar!",
-    ];
+      const chat = document.getElementById('chat');
 
-    input.addEventListener("keypress", function (e) {
-      if (e.key === "Enter" && input.value.trim() !== "") {
-        const userMsg = input.value.trim();
-        input.value = "";
+      const msgUsuario = document.createElement('div');
+      msgUsuario.className = 'mensagem usuario';
+      msgUsuario.innerText = texto;
+      chat.appendChild(msgUsuario);
 
-        const userDiv = document.createElement("div");
-        userDiv.className = "message from-user";
-        userDiv.textContent = userMsg;
-        chatBox.appendChild(userDiv);
-        chatBox.scrollTop = chatBox.scrollHeight;
+      input.value = "";
 
-        setTimeout(() => {
-          const botDiv = document.createElement("div");
-          botDiv.className = "message from-chat";
-          botDiv.textContent = respostas[Math.floor(Math.random() * respostas.length)];
-          chatBox.appendChild(botDiv);
-          chatBox.scrollTop = chatBox.scrollHeight;
-        }, 800); 
-      }
-    });
+      const resposta = gerarResposta(texto);
+
+      setTimeout(() => {
+        const msgBot = document.createElement('div');
+        msgBot.className = 'mensagem bot';
+        msgBot.innerText = resposta;
+        chat.appendChild(msgBot);
+        chat.scrollTop = chat.scrollHeight;
+      }, 500);
+    }
+
+    function gerarResposta(pergunta) {
+      const p = pergunta.toLowerCase();
+
+      if (p.includes("treino")) return "Você pode começar com 3 séries de agachamento, 2 de flexão e caminhada.";
+      if (p.includes("caloria") || p.includes("calorias")) return "A média diária é de 2000 a 2500 kcal, mas depende do seu perfil.";
+      if (p.includes("peso")) return "Para perder peso, foque em alimentação balanceada e exercícios aeróbicos.";
+      if (p.includes("hora") || p.includes("melhor horário")) return "O melhor horário para treinar é quando você consegue manter uma rotina.";
+      
+      return "Desculpe, ainda estou aprendendo a responder isso!";
+    }
   </script>
-  <?php
-  if (isset($_POST['sair'])) {
-    session_destroy();
-    header('Location: cadastro.php');
-    exit;
-  }
-  ?>
-</body>
-</html>
-
 
 </body>
 </html>
