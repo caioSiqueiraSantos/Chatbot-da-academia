@@ -4,52 +4,45 @@ require_once 'config.php';
 
 $mensagem = '';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['cadastro'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Cadastro
+    if (isset($_POST['cadastrar'])) {
         $nome = $_POST['nome'];
         $email = $_POST['email'];
         $senha = $_POST['senha'];
-        $peso = $_POST['peso'];
         $idade = $_POST['idade'];
-        $genero = $_POST['genero'];
-        $altura = $_POST['altura'];
 
-        foreach ($usuarios as $usuario) {
-            if ($usuario['email'] == $email) {
-                $mensagem = "Esse email já foi registrado!";
-                break;
-            }
-        }
 
-        if (empty($mensagem)) {
-            $usuarios[] = [
-                'nome' => $nome,
-                'email' => $email,
-                'senha' => $senha,
-                'peso' => $peso,
-                'idade' => $idade,
-                'genero' => $genero,
-                'altura' => $altura
-            ];
-            file_put_contents('config.php', '<?php $usuarios = ' . var_export($usuarios, true) . ';');
+        $stmt = $conn->prepare("SELECT * FROM usuarios WHERE email = ?");
+        $stmt->execute([$email]);
 
+        if ($stmt->rowCount() > 0) {
+            $mensagem = "Esse e-mail já foi cadastrado.";
+        } else {
+            $stmt = $conn->prepare("INSERT INTO usuarios (nome, email, senha, idade, peso, altura, genero) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$nome, $email, $senha, $idade, $peso, $altura, $genero]);
             $_SESSION['usuario'] = $nome;
-            header('Location: chatbot.php');
+            header("Location: chatbot.php");
             exit;
         }
     }
 
+    // Login
     if (isset($_POST['login'])) {
         $email = $_POST['email'];
         $senha = $_POST['senha'];
-        foreach ($usuarios as $usuario) {
-            if ($usuario['email'] == $email && $usuario['senha'] == $senha) {
-                $_SESSION['usuario'] = $usuario['nome'];
-                header('Location: chatbot.php');
-                exit;
-            }
+
+        $stmt = $conn->prepare("SELECT * FROM usuarios WHERE email = ? AND senha = ?");
+        $stmt->execute([$email, $senha]);
+        $user = $stmt->fetch();
+
+        if ($user) {
+            $_SESSION['usuario'] = $user['nome'];
+            header("Location: chatbot.php");
+            exit;
+        } else {
+            $mensagem = "Email ou senha inválidos.";
         }
-        $mensagem = "Login inválido!";
     }
 }
 ?>
@@ -57,37 +50,62 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Cadastro/Login</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Get Fit - Login</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .toggle-link {
+      color: #00ffaa;
+      font-size: 14px;
+      text-align: center;
+      margin-top: 10px;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body class="login-body">
-    <div class="logo-container">
-        <img src="marcelinho.jpg" alt="Logo">
-        <p class="logo-legenda">MARCELINHO FIT</p>
-    </div>
 
-    <div class="form-container">
-        <?php if ($mensagem) echo "<p class='mensagem'>$mensagem</p>"; ?>
+  <div class="logo-container">
+    <img src="marcelinho.jpg" alt="Logo">
+    <p class="logo-legenda">GET FIT</p>
+  </div>
 
-        <form method="post">
-            <h2>Cadastro</h2>
-            <input type="text" name="nome" placeholder="Nome" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="senha" placeholder="Senha" required>
-            <input type="number" name="peso" placeholder="Peso (kg)" required>
-            <input type="number" name="idade" placeholder="Idade" required>
-            <input type="text" name="genero" placeholder="Gênero" required>
-            <input type="number" name="altura" placeholder="Altura (cm)" required>
-            <button type="submit" name="cadastro">Cadastrar</button>
-        </form>
+  <?php if ($mensagem): ?>
+    <p class="mensagem"><?= $mensagem ?></p>
+  <?php endif; ?>
 
-        <form method="post">
-            <h2>Login</h2>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="senha" placeholder="Senha" required>
-            <button type="submit" name="login">Entrar</button>
-        </form>
-    </div>
+  <div class="form-container" id="login-form">
+    <h2>Login</h2>
+    <form method="post">
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="senha" placeholder="Senha" required>
+      <button type="submit" name="login">Entrar</button>
+    </form>
+    <div class="toggle-link" onclick="mostrarCadastro()">Cadastrar</div>
+  </div>
+
+  <div class="form-container" id="cadastro-form" style="display: none;">
+    <h2>Cadastro</h2>
+    <form method="post">
+      <input type="text" name="nome" placeholder="Nome completo" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="senha" placeholder="Senha" required>
+      <input type="number" name="idade" placeholder="Idade" required>
+      <button type="submit" name="cadastrar">Cadastrar</button>
+    </form>
+    <div class="toggle-link" onclick="mostrarLogin()">Voltar ao login</div>
+  </div>
+
+  <script>
+    function mostrarCadastro() {
+      document.getElementById('login-form').style.display = 'none';
+      document.getElementById('cadastro-form').style.display = 'block';
+    }
+    function mostrarLogin() {
+      document.getElementById('login-form').style.display = 'block';
+      document.getElementById('cadastro-form').style.display = 'none';
+    }
+  </script>
 </body>
 </html>
