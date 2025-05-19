@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <div class="logo-container">
     <img src="/static/img/marcelinho.jpg" alt="Logo">
-    <p class="logo-legenda">GET FIT</p>
+    <p class="logo-legenda">Marcelinho Fit</p>
   </div>
 
   <?php if ($mensagem): ?>

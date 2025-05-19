@@ -169,34 +169,23 @@ $usuario = $_SESSION['usuario'];
     const chatContainer = document.getElementById('chat');
     const inputUsuario = document.getElementById('inputUsuario');
     const entradaTextoContainer = document.getElementById('entradaTexto');
-    const menuBaloesPrincipais = document.querySelector('.baloes'); // O container dos seus botões de menu principais
-    // Sanitização mais robusta do nome do usuário vindo do PHP
+    const menuBaloesPrincipais = document.querySelector('.baloes');
     const nomeUsuarioPHP = '<?= htmlspecialchars($usuario, ENT_QUOTES, 'UTF-8') ?>';
 
-    /**
-     * Adiciona uma mensagem ao contêiner do chat.
-     * @param {string} texto O conteúdo da mensagem.
-     * @param {string} tipo 'usuario' ou 'bot'.
-     */
     function adicionarMensagemAoChat(texto, tipo) {
       const msgDiv = document.createElement('div');
       msgDiv.className = `mensagem ${tipo}`;
-      msgDiv.textContent = texto; // Seguro para texto; para HTML, use com cautela ou sanitize.
+      msgDiv.textContent = texto;
       chatContainer.appendChild(msgDiv);
       chatContainer.scrollTop = chatContainer.scrollHeight;
     }
 
-    /**
-     * Envia a pergunta para o backend e processa a resposta.
-     * @param {string} perguntaTexto O texto da pergunta ou comando.
-     */
     function responder(perguntaTexto) {
       adicionarMensagemAoChat(perguntaTexto, 'usuario');
 
-      // Esconde menus e inputs específicos enquanto aguarda a resposta
       if (menuBaloesPrincipais) menuBaloesPrincipais.style.display = 'none';
-      entradaTextoContainer.style.display = 'none'; // Esconde o input de texto geral
-      removerBotoesSimNao(); // Remove quaisquer botões Sim/Não pendentes
+      entradaTextoContainer.style.display = 'none';
+      removerBotoesSimNao();
 
       fetch('http://127.0.0.1:5000/perguntar', {
           method: 'POST',
@@ -218,42 +207,56 @@ $usuario = $_SESSION['usuario'];
         })
         .then(data => {
           adicionarMensagemAoChat(data.resposta, 'bot');
-          analisarRespostaBot(data.resposta); // Analisa a resposta para ações de UI
+          if (Array.isArray(data.botoes) && data.botoes.length > 0) {
+            criarBotoesDeOpcao(data.botoes);
+          } else {
+            analisarRespostaBot(data.resposta);
+          }
         })
+
+
         .catch(error => {
           console.error("Erro ao enviar/receber mensagem:", error);
           adicionarMensagemAoChat(`Erro: ${error.message || "Não foi possível conectar ao bot."}`, 'bot');
-          // Em caso de erro de comunicação, reexibe o menu principal
           if (menuBaloesPrincipais) menuBaloesPrincipais.style.display = 'flex';
           entradaTextoContainer.style.display = 'none';
           removerBotoesSimNao();
         });
     }
 
-    /**
-     * Analisa a resposta do bot para determinar quais controles de UI mostrar.
-     * @param {string} respostaBot O texto da resposta do bot.
-     */
+    function criarBotoesDeOpcao(opcoes) {
+      removerBotoesSimNao(); // se houver
+
+      const container = document.createElement('div');
+      container.className = 'baloes botoes-opcao';
+
+      opcoes.forEach(opcao => {
+        const botao = document.createElement('button');
+        botao.textContent = opcao;
+        botao.onclick = () => responder(opcao);
+        container.appendChild(botao);
+      });
+
+      chatContainer.appendChild(container);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
     function analisarRespostaBot(respostaBot) {
       const respostaLower = respostaBot.toLowerCase();
       let mostrarEntradaDeTexto = false;
       let mostrarOpcoesSimNao = false;
 
-      // Palavras-chave que indicam a necessidade de botões "Sim" ou "Não"
       const frasesParaSimNao = [
         "deseja adicionar", "deseja atualizar", "deseja alterar",
         "deseja confirmar", "tem certeza", "confirma?", "responda com 'sim' ou 'não'"
-        // Adicione outras frases específicas se necessário
       ];
 
-      // Palavras-chave que indicam a necessidade de entrada de texto pelo usuário,
-      // incluindo mensagens de erro que pedem para tentar novamente a mesma entrada.
       const frasesParaEntradaDeTexto = [
-        "qual seu peso", "qual sua altura", "qual seu gênero", // Perguntas diretas
-        "digite seu", "informe o", "seu nome", // Outras formas de pedir input
-        "peso inválido", "altura inválida", "gênero inválido", // Erros de validação
-        "valor inválido", "formato incorreto", "tente novamente com", // Erros genéricos
-        "por favor, digite", "por favor, insira", "necessário informar" // Re-prompts
+        "qual seu peso", "qual sua altura", "qual seu gênero",
+        "digite seu", "informe o", "seu nome",
+        "peso inválido", "altura inválida", "gênero inválido",
+        "valor inválido", "formato incorreto", "tente novamente com",
+        "por favor, digite", "por favor, insira", "necessário informar"
       ];
 
       if (frasesParaSimNao.some(frase => respostaLower.includes(frase))) {
@@ -262,55 +265,43 @@ $usuario = $_SESSION['usuario'];
         mostrarEntradaDeTexto = true;
       }
 
-      // Atualiza a UI com base nas flags
       if (mostrarOpcoesSimNao) {
         criarBotoesSimNao();
-        entradaTextoContainer.style.display = 'none'; // Esconde input de texto se for mostrar Sim/Não
-        if (menuBaloesPrincipais) menuBaloesPrincipais.style.display = 'none'; // Esconde menu principal
+        entradaTextoContainer.style.display = 'none';
+        if (menuBaloesPrincipais) menuBaloesPrincipais.style.display = 'none';
       } else if (mostrarEntradaDeTexto) {
-        removerBotoesSimNao(); // Garante que botões Sim/Não sejam removidos
+        removerBotoesSimNao();
         entradaTextoContainer.style.display = 'flex';
-        inputUsuario.focus(); // Dá foco ao campo de input
-        if (menuBaloesPrincipais) menuBaloesPrincipais.style.display = 'none'; // Esconde menu principal
+        inputUsuario.focus();
+        if (menuBaloesPrincipais) menuBaloesPrincipais.style.display = 'none';
       } else {
-        // Se nenhuma das condições acima, é uma resposta final ou informativa.
-        // Volta ao estado padrão: mostra menu principal, esconde outros inputs.
         removerBotoesSimNao();
         entradaTextoContainer.style.display = 'none';
         if (menuBaloesPrincipais) menuBaloesPrincipais.style.display = 'flex';
       }
     }
 
-    /**
-     * Função para enviar o texto digitado pelo usuário.
-     */
     function enviarTexto() {
       const texto = inputUsuario.value.trim();
       if (texto === "") return;
 
       responder(texto);
-      inputUsuario.value = ""; // Limpa o campo de input
-      // A visibilidade do campo de input após o envio será controlada por analisarRespostaBot
+      inputUsuario.value = "";
     }
 
-    /**
-     * Remove quaisquer botões Sim/Não existentes do chat.
-     */
     function removerBotoesSimNao() {
-      const botoesExistentes = chatContainer.querySelector('.botoes-sim-nao-container');
+      const botoesExistentes = chatContainer.querySelector('.botoes-sim-nao-container, .botoes-opcao');
       if (botoesExistentes) {
         botoesExistentes.remove();
       }
     }
 
-    /**
-     * Cria e adiciona botões "Sim" e "Não" ao chat.
-     */
+
     function criarBotoesSimNao() {
-      removerBotoesSimNao(); // Garante que não haja duplicatas
+      removerBotoesSimNao();
 
       const btnContainer = document.createElement('div');
-      btnContainer.className = 'baloes botoes-sim-nao-container'; // Reutiliza a classe para estilo
+      btnContainer.className = 'baloes botoes-sim-nao-container';
       btnContainer.style.justifyContent = 'center';
       btnContainer.style.marginTop = '10px';
 
@@ -318,8 +309,6 @@ $usuario = $_SESSION['usuario'];
       botaoSim.textContent = "Sim";
       botaoSim.onclick = () => {
         responder("Sim");
-        // Não precisa remover o btnContainer aqui, pois `responder` chamará `removerBotoesSimNao`
-        // e `analisarRespostaBot` cuidará da UI.
       };
 
       const botaoNao = document.createElement('button');
@@ -334,22 +323,16 @@ $usuario = $_SESSION['usuario'];
       chatContainer.scrollTop = chatContainer.scrollHeight;
     }
 
-    // Adiciona o listener para a tecla Enter no campo de input
     inputUsuario.addEventListener('keydown', function(event) {
       if (event.key === 'Enter') {
-        event.preventDefault(); // Previne o comportamento padrão do Enter
+        event.preventDefault();
         enviarTexto();
       }
     });
 
-    // Estado inicial da UI ao carregar a página:
-    // A primeira mensagem do bot não requer input específico.
-    // O menu principal deve estar visível e o campo de texto escondido.
     document.addEventListener('DOMContentLoaded', () => {
       if (menuBaloesPrincipais) menuBaloesPrincipais.style.display = 'flex';
       entradaTextoContainer.style.display = 'none';
-      // Se a primeira mensagem do bot já precisasse de uma ação, você chamaria analisarRespostaBot aqui.
-      // Ex: analisarRespostaBot(document.querySelector('.chat-container .mensagem.bot').textContent);
     });
   </script>
 

@@ -1,0 +1,105 @@
+[
+  {
+    "id": 1,
+    "nome": "Emagrecimento",
+    "objetivo": "emagrecimento",
+    "divisao": {
+      "A": [
+        "Cardio Moderado (Esteira/Bicicleta) - 30 min",
+        "Agachamento com Salto - 3x15",
+        "Flexão de Braço (joelhos se necessário) - 3xMax",
+        "Prancha - 3x45s"
+      ],
+      "B": [
+        "Cardio HIIT (pular corda/sprint) - 20 min",
+        "Afundo - 3x12 (cada perna)",
+        "Remada Curvada com Halteres - 3x15",
+        "Abdominal Bicicleta - 3x20"
+      ],
+      "C": [
+        "Circuito Funcional (Burpees, Mountain Climbers, Polichinelos) - 30 min",
+        "Elevação Pélvica - 3x15",
+        "Desenvolvimento com Halteres (sentado) - 3x12",
+        "Russian Twist - 3x20"
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "nome": "Força",
+    "objetivo": "forca",
+    "divisao": {
+      "A": [
+        "Agachamento Livre - 5x5",
+        "Supino Reto com Barra - 5x5",
+        "Remada Cavalinho - 4x6",
+        "Desenvolvimento com Barra (em pé) - 4x6"
+      ],
+      "B": [
+        "Levantamento Terra - 5x5",
+        "Remada Curvada com Barra - 5x5",
+        "Supino Inclinado com Halteres - 4x6",
+        "Paralelas - 4xMax"
+      ],
+      "C": [
+        "Leg Press - 4x8",
+        "Tríceps Testa - 4x8",
+        "Rosca Direta com Barra - 4x8",
+        "Barra Fixa (assistida se necessário) - 4xMax"
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "nome": "Hipertrofia",
+    "objetivo": "hipertrofia",
+    "divisao": {
+      "A": [
+        "Agachamento no Smith - 4x10-12",
+        "Leg Press - 3x12-15",
+        "Extensora - 3x15",
+        "Flexora - 3x15",
+        "Panturrilha em pé - 4x15-20"
+      ],
+      "B": [
+        "Supino Inclinado com Halteres - 4x10-12",
+        "Crucifixo Reto - 3x12-15",
+        "Desenvolvimento com Halteres (sentado) - 4x10-12",
+        "Elevação Lateral - 3x15",
+        "Tríceps Pulley - 4x12-15"
+      ],
+      "C": [
+        "Puxada Alta (frente) - 4x10-12",
+        "Remada Sentada (cabo) - 3x12-15",
+        "Rosca Direta com Barra - 4x10-12",
+        "Rosca Martelo - 3x12-15",
+        "Encolhimento com Halteres - 3x15"
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "nome": "Resistência",
+    "objetivo": "resistencia",
+    "divisao": {
+      "A": [
+        "Corrida Contínua - 40 min (Ritmo Moderado)",
+        "Flexões - 3xMax",
+        "Remada Baixa (Cabo) - 3x15-20",
+        "Agachamento com Peso Corporal - 3x20-25"
+      ],
+      "B": [
+        "Ciclismo - 45 min (Variação de Intensidade)",
+        "Polichinelos - 3x60s",
+        "Afundo com Peso Corporal - 3x15 (cada perna)",
+        "Elevação Frontal com Halteres Leves - 3x20"
+      ],
+      "C": [
+        "Natação (Intervalos) - 30 min",
+        "Burpees - 3x10-12",
+        "Prancha lateral - 3x30s (cada lado)",
+        "Saltos na Caixa (Box Jump) - 3x10"
+      ]
+    }
+  }
+]

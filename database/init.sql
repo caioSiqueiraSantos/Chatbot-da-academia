@@ -10,4 +10,5 @@ CREATE TABLE usuarios (
     peso FLOAT,
     altura FLOAT,
     genero VARCHAR(20)
+    treino_id INT;
 );
