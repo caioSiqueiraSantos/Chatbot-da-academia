@@ -86,7 +86,7 @@ def processar_fluxo(usuario_nome, mensagem_usuario, conn):
             estado_atual_do_usuario['altura_temp_m'] = altura_m
             # Avança para a próxima etapa
             estado_atual_do_usuario['etapa'] = 'coletar_genero'
-            resposta_para_usuario = "Ok! Qual seu gênero? (Masculino, Feminino, Não Binário)"
+            resposta_para_usuario = "Ok! Qual seu gênero? (Masculino, Feminino, outro)"
         except ValueError:
             # Se a conversão ou validação falhar
             resposta_para_usuario = "Altura inválida. Por favor, digite um número válido para a altura em metros (ex: 1.75)."
@@ -95,7 +95,7 @@ def processar_fluxo(usuario_nome, mensagem_usuario, conn):
         genero = mensagem_usuario.strip()
         # Validação simples do gênero
         if not genero or len(genero) > 50: 
-            resposta_para_usuario = "Gênero inválido. Por favor, informe seu gênero (Masculino, Feminino, Não Binário)."
+            resposta_para_usuario = "Gênero inválido. Por favor, informe seu gênero (Masculino, Feminino, outro)."
         else:
             # Se o gênero é válido, tenta salvar no banco
             peso_coletado = estado_atual_do_usuario.get('peso_temp')
@@ -122,7 +122,7 @@ def processar_fluxo(usuario_nome, mensagem_usuario, conn):
                         estado_usuario.pop(usuario_nome, None) # Limpa o estado atual de modificação
                         # Retorna a mensagem que inicia a próxima etapa do fluxo de treino
                         # Esta mensagem será interceptada pelo app.py para definir o estado 'aguardando_objetivo_treino'
-                        return "Suas medidas foram atualizadas com sucesso! Agora, para montar seu treino, preciso saber qual o seu objetivo. Por favor, digite um dos seguintes: emagrecimento, força, hipertrofia, resistência."
+                        return "Suas medidas foram atualizadas com sucesso! Agora, para montar seu treino, preciso saber qual o seu objetivo. Por favor, digite um dos seguintes: emagrecimento, forca, hipertrofia, resistencia."
                     else:
                         # Se não veio do fluxo de treino, apenas confirma a atualização e limpa o estado
                         estado_usuario.pop(usuario_nome, None) # Limpa o estado
