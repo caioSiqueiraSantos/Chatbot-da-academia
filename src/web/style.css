@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .login-body {
   background-color: #1e1e2f;
   color: white;
@@ -40,6 +45,7 @@
   margin: 5px 0;
   border-radius: 5px;
   border: none;
+  box-sizing: border-box;
 }
 
 .form-container button {
@@ -50,6 +56,6 @@
 }
 
 .mensagem {
-  color: #ff6b6b;
+  color: #00c8ff;
   margin-bottom: 10px;
 }
