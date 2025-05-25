@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="UTF-8">
   <title>Get Fit - Login</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/static/style.css">
   <style>
     .toggle-link {
       color: #00ffaa;
@@ -67,8 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="login-body">
 
   <div class="logo-container">
-    <img src="marcelinho.jpg" alt="Logo">
-    <p class="logo-legenda">GET FIT</p>
+    <img src="/static/img/marcelinho.jpg" alt="Logo">
+    <p class="logo-legenda">Marcelinho Fit</p>
   </div>
 
   <?php if ($mensagem): ?>
