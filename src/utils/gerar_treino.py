@@ -1,91 +1,66 @@
 import json
 import os
-import sys
-from typing import Dict, Union
+import traceback
+import mysql.connector
+from typing import Dict, Union 
 
-def log_error(error_msg: str):
-    """Log de erros para depuração"""
-    print(f"ERRO: {error_msg}", file=sys.stderr)
-
-def formatar_treino(treino: Dict) -> str:
-    """Formata o treino para exibição no chat"""
+def gerar_treino(user_data: Dict, conn) -> Union[str, Dict]:
     try:
-        formatted = f"➤ Objetivo: {treino.get('nome', 'Treino Personalizado')}\n\n"
-        for divisao, exercicios in treino.get('divisao', {}).items():
-            formatted += f" {divisao}:\n"
-            formatted += "\n".join(f"   ▪ {ex}" for ex in exercicios)
-            formatted += "\n\n"
-        return formatted.strip()
-    except Exception as e:
-        log_error(f"Erro ao formatar treino: {str(e)}")
-        return "Treino montado :)"
+        nome = user_data.get("nome")
+        genero = user_data.get("genero", "").lower()
+        objetivo = user_data.get("objetivo_temp", "").lower()
 
-def carregar_treinos(json_path: str) -> Union[Dict, None]:
-    """Carrega os treinos do arquivo JSON"""
-    try:
-        with open(json_path, "r", encoding="utf-8") as file:
-            return json.load(file)
-    except Exception as e:
-        log_error(f"Falha ao carregar treino.json: {str(e)}")
-        return None
+        idade_str = user_data.get("idade")
+        peso_str = user_data.get("peso")
+        altura_str = user_data.get("altura")
 
-def gerar_treino(user_data: Dict, conn) -> Union[Dict, str]:
-    """Gera treino personalizado baseado no objetivo do usuário"""
-    try:
-        # Verificação básica dos dados do usuário
-        if not user_data or not user_data.get("nome"):
-            return "Dados do usuário incompletos."
+        if not all([nome, genero, objetivo, idade_str, peso_str, altura_str]):
+            missing_fields = [
+                f for f in ["nome", "genero", "objetivo", "idade", "peso", "altura"]
+                if not user_data.get(f if f != "objetivo" else "objetivo_temp")
+            ]
+            return f"Erro: Faltam dados essenciais do usuário para montar o treino. Campos ausentes: {', '.join(missing_fields)}."
 
-        objetivo = user_data.get("objetivo", "").lower()
-        if not objetivo:
-            return "Objetivo de treino não definido."
+        try:
+            idade = int(idade_str)
+            peso = float(peso_str)
+            altura = float(altura_str)
+            if altura == 0: 
+                return "Erro: Altura inválida (não pode ser zero)."
+        except ValueError:
+            return "Erro: Idade, peso ou altura contêm valores inválidos."
 
-        # Caminho para o arquivo JSON
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        json_path = os.path.normpath(
-            os.path.join(script_dir, '..', '..', 'database', 'treino.json')
-        )
+        imc = peso / (altura ** 2)
 
-        # Carregar treinos
-        todos_os_treinos = carregar_treinos(json_path)
-        if not todos_os_treinos:
-            return "Erro ao carregar treinos disponíveis."
+        caminho = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'database', 'treino.json'))
+        with open(caminho, 'r', encoding='utf-8') as f:
+            treinos = json.load(f)
 
-        # Encontrar treino correspondente
-        treino_escolhido = next(
-            (t for t in todos_os_treinos 
-             if str(t.get("objetivo", "")).lower() == objetivo),
+        treino_encontrado = next(
+            (t for t in treinos
+             if t.get('genero', '').lower() == genero
+             and t.get('objetivo', '').lower() == objetivo
+             and t.get('idade_min', 0) <= idade <= t.get('idade_max', 999) 
+             and t.get('imc_min', 0) <= imc <= t.get('imc_max', 999)),    
             None
         )
 
-        if not treino_escolhido:
-            objetivos_disponiveis = ", ".join(
-                {str(t.get("objetivo", "")) for t in todos_os_treinos}
-            )
-            return f"Objetivo '{objetivo}' inválido. Opções: {objetivos_disponiveis}"
+        if not treino_encontrado:
+            return "Nenhum treino compatível foi encontrado com base em seu perfil atual (gênero, objetivo, idade, IMC)."
 
-        # Atualizar banco de dados
-        try:
-            cursor = conn.cursor()
-            cursor.execute(
-                "UPDATE usuarios SET treino_id = %s WHERE nome = %s",
-                (treino_escolhido.get("id"), user_data.get("nome")))
-            conn.commit()
-            cursor.close()
-        except Exception as db_error:
-            log_error(f"Erro DB ao salvar treino: {db_error}")
-
-        # Retornar resposta formatada
         return {
-            "message": "Treino montado com sucesso!",
-            "formatted": formatar_treino(treino_escolhido),
-            "treino": {
-                "A": treino_escolhido.get('divisao', {}).get('A', []),
-                "B": treino_escolhido.get('divisao', {}).get('B', []),
-                "C": treino_escolhido.get('divisao', {}).get('C', [])
-            }
+            "treino_selecionado_id": treino_encontrado.get('id'),
+            "nome_treino": treino_encontrado.get('nome'),
+            "divisao": treino_encontrado.get('divisao') 
         }
 
+    except FileNotFoundError:
+        print(f"ERRO em gerar_treino: Arquivo não encontrado em '{caminho}'")
+        return "Erro crítico: Não foi possível encontrar o arquivo de configuração dos treinos."
+    except KeyError as ke: 
+        print(f"ERRO em gerar_treino: Chave não encontrada no JSON - {ke}")
+        return f"Erro: Formato inválido no arquivo de treinos (chave ausente: {ke})."
     except Exception as e:
-        log_error(f"Erro inesperado em gerar_treino: {str(e)}")
-        return "Desculpe, ocorreu um erro ao gerar seu treino."
+        print(f"Erro ao gerar treino: {e}")
+        traceback.print_exc()
+        return "Ocorreu um erro ao montar seu treino. Tente novamente."
