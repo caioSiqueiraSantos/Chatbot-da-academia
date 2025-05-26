@@ -1,105 +1,722 @@
-[
-  {
-    "treino_id": 1,
-    "nome": "Emagrecimento",
-    "objetivo": "emagrecimento",
-    "divisao": {
-      "A": [
-        "Cardio Moderado (Esteira/Bicicleta) - 30 min",
-        "Agachamento com Salto - 3x15",
-        "Flexão de Braço (joelhos se necessário) - 3xMax",
-        "Prancha - 3x45s"
-      ],
-      "B": [
-        "Cardio HIIT (pular corda/sprint) - 20 min",
-        "Afundo - 3x12 (cada perna)",
-        "Remada Curvada com Halteres - 3x15",
-        "Abdominal Bicicleta - 3x20"
-      ],
-      "C": [
-        "Circuito Funcional (Burpees, Mountain Climbers, Polichinelos) - 30 min",
-        "Elevação Pélvica - 3x15",
-        "Desenvolvimento com Halteres (sentado) - 3x12",
-        "Russian Twist - 3x20"
-      ]
+  [
+    {
+      "id": 1,
+      "nome": "Hipertrofia Masculino - V1",
+      "genero": "masculino",
+      "objetivo": "hipertrofia",
+      "idade_min": 13,
+      "idade_max": 17,
+      "imc_min": 18.5,
+      "imc_max": 24.9,
+      "divisao": {
+        "A": [
+          "Supino reto - 4x10",
+          "Agachamento - 4x12",
+          "Remada curvada - 4x10",
+          "Leg press - 4x10"
+        ],
+        "B": [
+          "Remada curvada - 4x10",
+          "Leg press - 4x10",
+          "Rosca direta - 3x12",
+          "Tríceps corda - 3x12"
+        ],
+        "C": [
+          "Rosca direta - 3x12",
+          "Tríceps corda - 3x12",
+          "Crucifixo reto - 3x12",
+          "Puxada frente - 3x12"
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "nome": "Hipertrofia Masculino - V2",
+      "genero": "masculino",
+      "objetivo": "hipertrofia",
+      "idade_min": 16,
+      "idade_max": 25,
+      "imc_min": 18.5,
+      "imc_max": 24.9,
+      "divisao": {
+        "A": [
+          "Supino reto - 4x10",
+          "Agachamento - 4x12",
+          "Remada curvada - 4x10",
+          "Leg press - 4x10"
+        ],
+        "B": [
+          "Remada curvada - 4x10",
+          "Leg press - 4x10",
+          "Rosca direta - 3x12",
+          "Tríceps corda - 3x12"
+        ],
+        "C": [
+          "Rosca direta - 3x12",
+          "Tríceps corda - 3x12",
+          "Crucifixo reto - 3x12",
+          "Puxada frente - 3x12"
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "nome": "Hipertrofia Masculino - V3",
+      "genero": "masculino",
+      "objetivo": "hipertrofia",
+      "idade_min": 18,
+      "idade_max": 50,
+      "imc_min": 18.5,
+      "imc_max": 24.9,
+      "divisao": {
+        "A": [
+          "Supino reto - 4x10",
+          "Agachamento - 4x12",
+          "Remada curvada - 4x10",
+          "Leg press - 4x10"
+        ],
+        "B": [
+          "Remada curvada - 4x10",
+          "Leg press - 4x10",
+          "Rosca direta - 3x12",
+          "Tríceps corda - 3x12"
+        ],
+        "C": [
+          "Rosca direta - 3x12",
+          "Tríceps corda - 3x12",
+          "Crucifixo reto - 3x12",
+          "Puxada frente - 3x12"
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "nome": "forca Masculino - V1",
+      "genero": "masculino",
+      "objetivo": "forca",
+      "idade_min": 13,
+      "idade_max": 17,
+      "imc_min": 18.5,
+      "imc_max": 24.9,
+      "divisao": {
+        "A": [
+          "Levantamento terra - 5x5",
+          "Supino reto - 5x5",
+          "Agachamento livre - 5x5",
+          "Remada unilateral - 4x6"
+        ],
+        "B": [
+          "Agachamento livre - 5x5",
+          "Remada unilateral - 4x6",
+          "Rosca direta - 4x6",
+          "Paralelas - 4x6"
+        ],
+        "C": [
+          "Rosca direta - 4x6",
+          "Paralelas - 4x6",
+          "Tríceps testa - 4x6",
+          "Flexão explosiva - 4x8"
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "nome": "forca Masculino - V2",
+      "genero": "masculino",
+      "objetivo": "forca",
+      "idade_min": 16,
+      "idade_max": 25,
+      "imc_min": 18.5,
+      "imc_max": 24.9,
+      "divisao": {
+        "A": [
+          "Levantamento terra - 5x5",
+          "Supino reto - 5x5",
+          "Agachamento livre - 5x5",
+          "Remada unilateral - 4x6"
+        ],
+        "B": [
+          "Agachamento livre - 5x5",
+          "Remada unilateral - 4x6",
+          "Rosca direta - 4x6",
+          "Paralelas - 4x6"
+        ],
+        "C": [
+          "Rosca direta - 4x6",
+          "Paralelas - 4x6",
+          "Tríceps testa - 4x6",
+          "Flexão explosiva - 4x8"
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "nome": "forca Masculino - V3",
+      "genero": "masculino",
+      "objetivo": "forca",
+      "idade_min": 18,
+      "idade_max": 50,
+      "imc_min": 18.5,
+      "imc_max": 24.9,
+      "divisao": {
+        "A": [
+          "Levantamento terra - 5x5",
+          "Supino reto - 5x5",
+          "Agachamento livre - 5x5",
+          "Remada unilateral - 4x6"
+        ],
+        "B": [
+          "Agachamento livre - 5x5",
+          "Remada unilateral - 4x6",
+          "Rosca direta - 4x6",
+          "Paralelas - 4x6"
+        ],
+        "C": [
+          "Rosca direta - 4x6",
+          "Paralelas - 4x6",
+          "Tríceps testa - 4x6",
+          "Flexão explosiva - 4x8"
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "nome": "resistencia Masculino - V1",
+      "genero": "masculino",
+      "objetivo": "resistencia",
+      "idade_min": 13,
+      "idade_max": 17,
+      "imc_min": 18.5,
+      "imc_max": 24.9,
+      "divisao": {
+        "A": [
+          "Corrida leve - 20min",
+          "Polichinelo - 3x30",
+          "Agachamento - 3x20",
+          "Burpee - 3x15"
+        ],
+        "B": [
+          "Agachamento - 3x20",
+          "Burpee - 3x15",
+          "Abdominal - 3x25",
+          "Pular corda - 3x2min"
+        ],
+        "C": [
+          "Abdominal - 3x25",
+          "Pular corda - 3x2min",
+          "Mountain climber - 3x30s",
+          "Prancha - 3x45s"
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "nome": "resistencia Masculino - V2",
+      "genero": "masculino",
+      "objetivo": "resistencia",
+      "idade_min": 16,
+      "idade_max": 25,
+      "imc_min": 18.5,
+      "imc_max": 24.9,
+      "divisao": {
+        "A": [
+          "Corrida leve - 20min",
+          "Polichinelo - 3x30",
+          "Agachamento - 3x20",
+          "Burpee - 3x15"
+        ],
+        "B": [
+          "Agachamento - 3x20",
+          "Burpee - 3x15",
+          "Abdominal - 3x25",
+          "Pular corda - 3x2min"
+        ],
+        "C": [
+          "Abdominal - 3x25",
+          "Pular corda - 3x2min",
+          "Mountain climber - 3x30s",
+          "Prancha - 3x45s"
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "nome": "resistencia Masculino - V3",
+      "genero": "masculino",
+      "objetivo": "resistencia",
+      "idade_min": 18,
+      "idade_max": 50,
+      "imc_min": 18.5,
+      "imc_max": 24.9,
+      "divisao": {
+        "A": [
+          "Corrida leve - 20min",
+          "Polichinelo - 3x30",
+          "Agachamento - 3x20",
+          "Burpee - 3x15"
+        ],
+        "B": [
+          "Agachamento - 3x20",
+          "Burpee - 3x15",
+          "Abdominal - 3x25",
+          "Pular corda - 3x2min"
+        ],
+        "C": [
+          "Abdominal - 3x25",
+          "Pular corda - 3x2min",
+          "Mountain climber - 3x30s",
+          "Prancha - 3x45s"
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "nome": "Emagrecimento Masculino - V1",
+      "genero": "masculino",
+      "objetivo": "emagrecimento",
+      "idade_min": 13,
+      "idade_max": 17,
+      "imc_min": 25,
+      "imc_max": 40,
+      "divisao": {
+        "A": [
+          "Caminhada rápida - 30min",
+          "Bike ergométrica - 20min",
+          "Agachamento com peso corporal - 3x15",
+          "Flexão - 3x10"
+        ],
+        "B": [
+          "Agachamento com peso corporal - 3x15",
+          "Flexão - 3x10",
+          "Prancha - 3x30s",
+          "Abdominal supra - 3x20"
+        ],
+        "C": [
+          "Prancha - 3x30s",
+          "Abdominal supra - 3x20",
+          "Afundo - 3x12",
+          "Pular corda - 3x1min"
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "nome": "Emagrecimento Masculino - V2",
+      "genero": "masculino",
+      "objetivo": "emagrecimento",
+      "idade_min": 16,
+      "idade_max": 25,
+      "imc_min": 25,
+      "imc_max": 40,
+      "divisao": {
+        "A": [
+          "Caminhada rápida - 30min",
+          "Bike ergométrica - 20min",
+          "Agachamento com peso corporal - 3x15",
+          "Flexão - 3x10"
+        ],
+        "B": [
+          "Agachamento com peso corporal - 3x15",
+          "Flexão - 3x10",
+          "Prancha - 3x30s",
+          "Abdominal supra - 3x20"
+        ],
+        "C": [
+          "Prancha - 3x30s",
+          "Abdominal supra - 3x20",
+          "Afundo - 3x12",
+          "Pular corda - 3x1min"
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "nome": "Emagrecimento Masculino - V3",
+      "genero": "masculino",
+      "objetivo": "emagrecimento",
+      "idade_min": 18,
+      "idade_max": 50,
+      "imc_min": 25,
+      "imc_max": 40,
+      "divisao": {
+        "A": [
+          "Caminhada rápida - 30min",
+          "Bike ergométrica - 20min",
+          "Agachamento com peso corporal - 3x15",
+          "Flexão - 3x10"
+        ],
+        "B": [
+          "Agachamento com peso corporal - 3x15",
+          "Flexão - 3x10",
+          "Prancha - 3x30s",
+          "Abdominal supra - 3x20"
+        ],
+        "C": [
+          "Prancha - 3x30s",
+          "Abdominal supra - 3x20",
+          "Afundo - 3x12",
+          "Pular corda - 3x1min"
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "nome": "Hipertrofia Feminino - V1",
+      "genero": "feminino",
+      "objetivo": "hipertrofia",
+      "idade_min": 13,
+      "idade_max": 17,
+      "imc_min": 18.5,
+      "imc_max": 24.9,
+      "divisao": {
+        "A": [
+          "Supino reto - 4x10",
+          "Agachamento - 4x12",
+          "Remada curvada - 4x10",
+          "Leg press - 4x10"
+        ],
+        "B": [
+          "Remada curvada - 4x10",
+          "Leg press - 4x10",
+          "Rosca direta - 3x12",
+          "Tríceps corda - 3x12"
+        ],
+        "C": [
+          "Rosca direta - 3x12",
+          "Tríceps corda - 3x12",
+          "Crucifixo reto - 3x12",
+          "Puxada frente - 3x12"
+        ]
+      }
+    },
+    {
+      "id": 14,
+      "nome": "Hipertrofia Feminino - V2",
+      "genero": "feminino",
+      "objetivo": "hipertrofia",
+      "idade_min": 16,
+      "idade_max": 25,
+      "imc_min": 18.5,
+      "imc_max": 24.9,
+      "divisao": {
+        "A": [
+          "Supino reto - 4x10",
+          "Agachamento - 4x12",
+          "Remada curvada - 4x10",
+          "Leg press - 4x10"
+        ],
+        "B": [
+          "Remada curvada - 4x10",
+          "Leg press - 4x10",
+          "Rosca direta - 3x12",
+          "Tríceps corda - 3x12"
+        ],
+        "C": [
+          "Rosca direta - 3x12",
+          "Tríceps corda - 3x12",
+          "Crucifixo reto - 3x12",
+          "Puxada frente - 3x12"
+        ]
+      }
+    },
+    {
+      "id": 15,
+      "nome": "Hipertrofia Feminino - V3",
+      "genero": "feminino",
+      "objetivo": "hipertrofia",
+      "idade_min": 18,
+      "idade_max": 50,
+      "imc_min": 18.5,
+      "imc_max": 24.9,
+      "divisao": {
+        "A": [
+          "Supino reto - 4x10",
+          "Agachamento - 4x12",
+          "Remada curvada - 4x10",
+          "Leg press - 4x10"
+        ],
+        "B": [
+          "Remada curvada - 4x10",
+          "Leg press - 4x10",
+          "Rosca direta - 3x12",
+          "Tríceps corda - 3x12"
+        ],
+        "C": [
+          "Rosca direta - 3x12",
+          "Tríceps corda - 3x12",
+          "Crucifixo reto - 3x12",
+          "Puxada frente - 3x12"
+        ]
+      }
+    },
+    {
+      "id": 16,
+      "nome": "forca Feminino - V1",
+      "genero": "feminino",
+      "objetivo": "forca",
+      "idade_min": 13,
+      "idade_max": 17,
+      "imc_min": 18.5,
+      "imc_max": 24.9,
+      "divisao": {
+        "A": [
+          "Levantamento terra - 5x5",
+          "Supino reto - 5x5",
+          "Agachamento livre - 5x5",
+          "Remada unilateral - 4x6"
+        ],
+        "B": [
+          "Agachamento livre - 5x5",
+          "Remada unilateral - 4x6",
+          "Rosca direta - 4x6",
+          "Paralelas - 4x6"
+        ],
+        "C": [
+          "Rosca direta - 4x6",
+          "Paralelas - 4x6",
+          "Tríceps testa - 4x6",
+          "Flexão explosiva - 4x8"
+        ]
+      }
+    },
+    {
+      "id": 17,
+      "nome": "forca Feminino - V2",
+      "genero": "feminino",
+      "objetivo": "forca",
+      "idade_min": 16,
+      "idade_max": 25,
+      "imc_min": 18.5,
+      "imc_max": 24.9,
+      "divisao": {
+        "A": [
+          "Levantamento terra - 5x5",
+          "Supino reto - 5x5",
+          "Agachamento livre - 5x5",
+          "Remada unilateral - 4x6"
+        ],
+        "B": [
+          "Agachamento livre - 5x5",
+          "Remada unilateral - 4x6",
+          "Rosca direta - 4x6",
+          "Paralelas - 4x6"
+        ],
+        "C": [
+          "Rosca direta - 4x6",
+          "Paralelas - 4x6",
+          "Tríceps testa - 4x6",
+          "Flexão explosiva - 4x8"
+        ]
+      }
+    },
+    {
+      "id": 18,
+      "nome": "forca Feminino - V3",
+      "genero": "feminino",
+      "objetivo": "forca",
+      "idade_min": 18,
+      "idade_max": 50,
+      "imc_min": 18.5,
+      "imc_max": 24.9,
+      "divisao": {
+        "A": [
+          "Levantamento terra - 5x5",
+          "Supino reto - 5x5",
+          "Agachamento livre - 5x5",
+          "Remada unilateral - 4x6"
+        ],
+        "B": [
+          "Agachamento livre - 5x5",
+          "Remada unilateral - 4x6",
+          "Rosca direta - 4x6",
+          "Paralelas - 4x6"
+        ],
+        "C": [
+          "Rosca direta - 4x6",
+          "Paralelas - 4x6",
+          "Tríceps testa - 4x6",
+          "Flexão explosiva - 4x8"
+        ]
+      }
+    },
+    {
+      "id": 19,
+      "nome": "resistencia Feminino - V1",
+      "genero": "feminino",
+      "objetivo": "resistencia",
+      "idade_min": 13,
+      "idade_max": 17,
+      "imc_min": 18.5,
+      "imc_max": 24.9,
+      "divisao": {
+        "A": [
+          "Corrida leve - 20min",
+          "Polichinelo - 3x30",
+          "Agachamento - 3x20",
+          "Burpee - 3x15"
+        ],
+        "B": [
+          "Agachamento - 3x20",
+          "Burpee - 3x15",
+          "Abdominal - 3x25",
+          "Pular corda - 3x2min"
+        ],
+        "C": [
+          "Abdominal - 3x25",
+          "Pular corda - 3x2min",
+          "Mountain climber - 3x30s",
+          "Prancha - 3x45s"
+        ]
+      }
+    },
+    {
+      "id": 20,
+      "nome": "resistencia Feminino - V2",
+      "genero": "feminino",
+      "objetivo": "resistencia",
+      "idade_min": 16,
+      "idade_max": 25,
+      "imc_min": 18.5,
+      "imc_max": 24.9,
+      "divisao": {
+        "A": [
+          "Corrida leve - 20min",
+          "Polichinelo - 3x30",
+          "Agachamento - 3x20",
+          "Burpee - 3x15"
+        ],
+        "B": [
+          "Agachamento - 3x20",
+          "Burpee - 3x15",
+          "Abdominal - 3x25",
+          "Pular corda - 3x2min"
+        ],
+        "C": [
+          "Abdominal - 3x25",
+          "Pular corda - 3x2min",
+          "Mountain climber - 3x30s",
+          "Prancha - 3x45s"
+        ]
+      }
+    },
+    {
+      "id": 21,
+      "nome": "resistencia Feminino - V3",
+      "genero": "feminino",
+      "objetivo": "resistencia",
+      "idade_min": 18,
+      "idade_max": 50,
+      "imc_min": 18.5,
+      "imc_max": 24.9,
+      "divisao": {
+        "A": [
+          "Corrida leve - 20min",
+          "Polichinelo - 3x30",
+          "Agachamento - 3x20",
+          "Burpee - 3x15"
+        ],
+        "B": [
+          "Agachamento - 3x20",
+          "Burpee - 3x15",
+          "Abdominal - 3x25",
+          "Pular corda - 3x2min"
+        ],
+        "C": [
+          "Abdominal - 3x25",
+          "Pular corda - 3x2min",
+          "Mountain climber - 3x30s",
+          "Prancha - 3x45s"
+        ]
+      }
+    },
+    {
+      "id": 22,
+      "nome": "Emagrecimento Feminino - V1",
+      "genero": "feminino",
+      "objetivo": "emagrecimento",
+      "idade_min": 13,
+      "idade_max": 17,
+      "imc_min": 25,
+      "imc_max": 40,
+      "divisao": {
+        "A": [
+          "Caminhada rápida - 30min",
+          "Bike ergométrica - 20min",
+          "Agachamento com peso corporal - 3x15",
+          "Flexão - 3x10"
+        ],
+        "B": [
+          "Agachamento com peso corporal - 3x15",
+          "Flexão - 3x10",
+          "Prancha - 3x30s",
+          "Abdominal supra - 3x20"
+        ],
+        "C": [
+          "Prancha - 3x30s",
+          "Abdominal supra - 3x20",
+          "Afundo - 3x12",
+          "Pular corda - 3x1min"
+        ]
+      }
+    },
+    {
+      "id": 23,
+      "nome": "Emagrecimento Feminino - V2",
+      "genero": "feminino",
+      "objetivo": "emagrecimento",
+      "idade_min": 16,
+      "idade_max": 25,
+      "imc_min": 25,
+      "imc_max": 40,
+      "divisao": {
+        "A": [
+          "Caminhada rápida - 30min",
+          "Bike ergométrica - 20min",
+          "Agachamento com peso corporal - 3x15",
+          "Flexão - 3x10"
+        ],
+        "B": [
+          "Agachamento com peso corporal - 3x15",
+          "Flexão - 3x10",
+          "Prancha - 3x30s",
+          "Abdominal supra - 3x20"
+        ],
+        "C": [
+          "Prancha - 3x30s",
+          "Abdominal supra - 3x20",
+          "Afundo - 3x12",
+          "Pular corda - 3x1min"
+        ]
+      }
+    },
+    {
+      "id": 24,
+      "nome": "Emagrecimento Feminino - V3",
+      "genero": "feminino",
+      "objetivo": "emagrecimento",
+      "idade_min": 18,
+      "idade_max": 50,
+      "imc_min": 25,
+      "imc_max": 40,
+      "divisao": {
+        "A": [
+          "Caminhada rápida - 30min",
+          "Bike ergométrica - 20min",
+          "Agachamento com peso corporal - 3x15",
+          "Flexão - 3x10"
+        ],
+        "B": [
+          "Agachamento com peso corporal - 3x15",
+          "Flexão - 3x10",
+          "Prancha - 3x30s",
+          "Abdominal supra - 3x20"
+        ],
+        "C": [
+          "Prancha - 3x30s",
+          "Abdominal supra - 3x20",
+          "Afundo - 3x12",
+          "Pular corda - 3x1min"
+        ]
+      }
     }
-  },
-  {
-    "treino_id": 2,
-    "nome": "forca",
-    "objetivo": "forca",
-    "divisao": {
-      "A": [
-        "Agachamento Livre - 5x5",
-        "Supino Reto com Barra - 5x5",
-        "Remada Cavalinho - 4x6",
-        "Desenvolvimento com Barra (em pé) - 4x6"
-      ],
-      "B": [
-        "Levantamento Terra - 5x5",
-        "Remada Curvada com Barra - 5x5",
-        "Supino Inclinado com Halteres - 4x6",
-        "Paralelas - 4xMax"
-      ],
-      "C": [
-        "Leg Press - 4x8",
-        "Tríceps Testa - 4x8",
-        "Rosca Direta com Barra - 4x8",
-        "Barra Fixa (assistida se necessário) - 4xMax"
-      ]
-    }
-  },
-  {
-    "treino_id": 3,
-    "nome": "Hipertrofia",
-    "objetivo": "hipertrofia",
-    "divisao": {
-      "A": [
-        "Agachamento no Smith - 4x10-12",
-        "Leg Press - 3x12-15",
-        "Extensora - 3x15",
-        "Flexora - 3x15",
-        "Panturrilha em pé - 4x15-20"
-      ],
-      "B": [
-        "Supino Inclinado com Halteres - 4x10-12",
-        "Crucifixo Reto - 3x12-15",
-        "Desenvolvimento com Halteres (sentado) - 4x10-12",
-        "Elevação Lateral - 3x15",
-        "Tríceps Pulley - 4x12-15"
-      ],
-      "C": [
-        "Puxada Alta (frente) - 4x10-12",
-        "Remada Sentada (cabo) - 3x12-15",
-        "Rosca Direta com Barra - 4x10-12",
-        "Rosca Martelo - 3x12-15",
-        "Encolhimento com Halteres - 3x15"
-      ]
-    }
-  },
-  {
-    "treino_id": 4,
-    "nome": "resistencia",
-    "objetivo": "resistencia",
-    "divisao": {
-      "A": [
-        "Corrida Contínua - 40 min (Ritmo Moderado)",
-        "Flexões - 3xMax",
-        "Remada Baixa (Cabo) - 3x15-20",
-        "Agachamento com Peso Corporal - 3x20-25"
-      ],
-      "B": [
-        "Ciclismo - 45 min (Variação de Intensidade)",
-        "Polichinelos - 3x60s",
-        "Afundo com Peso Corporal - 3x15 (cada perna)",
-        "Elevação Frontal com Halteres Leves - 3x20"
-      ],
-      "C": [
-        "Natação (Intervalos) - 30 min",
-        "Burpees - 3x10-12",
-        "Prancha lateral - 3x30s (cada lado)",
-        "Saltos na Caixa (Box Jump) - 3x10"
-      ]
-    }
-  }
-]
+  ]
