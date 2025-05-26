@@ -76,14 +76,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <?php endif; ?>
 
   <div class="form-container" id="login-form">
-    <h2>Login</h2>
-    <form method="post">
-      <input type="email" name="email" placeholder="Email" required>
-      <input type="password" name="senha" placeholder="Senha" required>
-      <button type="submit" name="login">Entrar</button>
-    </form>
-    <div class="toggle-link" onclick="mostrarCadastro()">Cadastrar</div>
-  </div>
+  <form method="post">
+    <div class="form-header">
+      <h2>Login</h2>
+      <div class="toggle-link" onclick="mostrarCadastro()">Cadastrar</div>
+    </div>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="password" name="senha" placeholder="Senha" required>
+    <button type="submit" name="login">Entrar</button>
+  </form>
+</div>
+
+
 
   <div class="form-container" id="cadastro-form" style="display: none;">
     <h2>Cadastro</h2>
