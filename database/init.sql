@@ -1,4 +1,4 @@
-vCREATE DATABASE getfit DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE getfit DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE getfit;
 
 CREATE TABLE usuarios (
@@ -10,5 +10,5 @@ CREATE TABLE usuarios (
     peso FLOAT,
     altura FLOAT,
     genero VARCHAR(20)
-    id_treino int;
+    objetivo VARCHAR(20);
 );

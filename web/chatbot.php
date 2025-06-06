@@ -50,13 +50,12 @@ $usuario = $_SESSION['usuario'];
     }
 
     .chat-container {
-      flex: 1;
       padding: 20px;
-      overflow-y: auto;
       display: flex;
       flex-direction: column;
       gap: 10px;
-      padding-bottom: 130px; 
+      min-height: 70vh;
+      overflow-y: auto;
     }
 
     .mensagem {

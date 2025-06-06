@@ -5,7 +5,7 @@ O Chatbot da Academia é um projeto desenvolvido como parte de um trabalho acad�
 
 ## Funcionalidades
 Interação com o Cliente: O chatbot simula um ambiente de chat estilo Discord, tornando a interação mais amigável e moderna.
-Personalização de Treinos: Com base no cadastro e nas informações fornecidas pelo cliente, o chatbot cria um treino específico para cada perfil.
+Personalização de Treinos: Dentro do projeto terá uma lista de treinos já existentes e com base nas informações dadas pelo usuário, verificará qual poderá conciliar mais com sua biologia para alcançar seus objetivos.
 Ordenação com Quick Sort: O algoritmo Quick Sort é utilizado para ordenar listas de dados, como exercícios ou treinos, de forma eficiente.
 Manipulação de Listas: Toda a estrutura de dados do projeto é baseada em listas, aproveitando algoritmos eficientes para manipulação e ordenação.
 Tecnologias Utilizadas
